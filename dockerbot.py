@@ -38,11 +38,16 @@ def handle(msg):
     logger.info("{message_id} Got msg: {command}")
 
     # Reject unauthorized requests
-    if str(chat_id) not in os.getenv('ALLOWED_IDS'):
-        bot.sendPhoto(
-            chat_id, "https://github.com/t0mer/dockerbot/raw/master/No-Trespassing.gif")
-        logger.error(f"[{message_id}] Chat id not allowed: {chat_id}")
-        return
+    if (os.getenv('ALLOWED_IDS') and \
+       str(chat_id) not in os.getenv('ALLOWED_IDS')) \
+       or \
+       (os.getenv('BLOCKED_IDS') and \
+       str(chat_id) in os.getenv('BLOCKED_IDS')):
+            bot.sendPhoto(
+                chat_id, "https://github.com/t0mer/dockerbot/raw/master/No-Trespassing.gif")
+            logger.error(f"[{message_id}] Chat id not allowed: {chat_id}")
+            return
+
     #need to fix: so only active parts will show and not all options
     if command == '/?' or command == '/start':
         bot.sendMessage(chat_id, "List of available commands: ")
@@ -138,7 +143,7 @@ def handle(msg):
                             bot.sendMessage(chat_id,"Starting Sign process at https://web.mashov.info/students/login for Kid Number: " + str(Mashov_Kid_Number))
                             Prep_Switch_MASHOV_USER_DICT_ID_KID = list['mashov']['kid'+str(Mashov_Kid_Number)]['MASHOV_USER_ID_KID']
                             Prep_Switch_MASHOV_USER_DICT_ID_PWD = list['mashov']['kid'+str(Mashov_Kid_Number)]['MASHOV_USER_PWD_KID']
-                            Prep_Switch_MASHOV_USER_DICT_ID_SCHOOL_ID = list['mashov']['kid'+str(Mashov_Kid_Number)]['MASHOV_SCHOOL_ID_KID']                     
+                            Prep_Switch_MASHOV_USER_DICT_ID_SCHOOL_ID = list['mashov']['kid'+str(Mashov_Kid_Number)]['MASHOV_SCHOOL_ID_KID']
                             Mashov_Health_Statements.sign(Prep_Switch_MASHOV_USER_DICT_ID_KID, Prep_Switch_MASHOV_USER_DICT_ID_PWD, Prep_Switch_MASHOV_USER_DICT_ID_SCHOOL_ID, str(Mashov_Kid_Number), Image + str(Mashov_Kid_Number) + ".png")
                 else:
                     bot.sendMessage(chat_id, "mashov NOT configured")
