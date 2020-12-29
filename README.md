@@ -58,30 +58,36 @@ A config file will be created in ./botvid/config/config.yaml
 
 Please fill in the parameters in the file config.yml
 ```
-edu:
-    USER_ID: 
-    USER_KEY: 
-mashov:
-#Add Kids Block as needed
-#UNused Kid Block should be left empty or removed from file
-    kid1:
-        MASHOV_USER_ID_KID: 
-        MASHOV_USER_PWD_KID: 
-        MASHOV_SCHOOL_ID_KID: 
-    kid2:
-        MASHOV_USER_ID_KID:
-        MASHOV_USER_PWD_KID: 
-        MASHOV_SCHOOL_ID_KID:
-infogan:
-    BASE_URL: 
-    PARENT_NAME: 
-    PARENT_ID: 
-    KID_NAME: 
-    KID_ID: 
-webtop:
-    USER_ID: 
-    USER_KEY: 
-  ```
+users:
+    <The Telegram user ID>:
+        edu:
+            USER_ID:
+            USER_KEY:
+        mashov:
+        #Add Kids Block as needed
+        #Unused Kid Block should be left empty or removed from file
+            kid1:
+                MASHOV_USER_ID_KID:
+                MASHOV_USER_PWD_KID:
+                MASHOV_SCHOOL_ID_KID:
+            kid2:
+                MASHOV_USER_ID_KID:
+                MASHOV_USER_PWD_KID:
+                MASHOV_SCHOOL_ID_KID:
+        infogan:
+            BASE_URL:
+            PARENT_NAME:
+            PARENT_ID:
+            KID_NAME:
+            KID_ID:
+        webtop:
+            USER_ID:
+            USER_KEY:
+        amdocs:
+            EMAIL:
+            USER_ID:
+            PASSWORD:
+```
 
 You may fill only the section that are relevant to you.
 
